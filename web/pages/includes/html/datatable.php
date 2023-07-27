@@ -25,7 +25,8 @@
                   echo "<td>" . $resultado['device_name'] . "</td>";
                   echo "<td>" . $resultado['device_serie'] . "</td>";
                   echo "<td>" . $resultado['device_user_id'] . "</td>";
-                  echo "<td> Editar</td>";
+                  echo "<td> Editar | Eliminar</td>";
+
                   echo "</tr>";
                 }
 
