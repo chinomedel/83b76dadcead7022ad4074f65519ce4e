@@ -17,16 +17,18 @@
         <tbody>
           <?php 
          
-            if (count($resultado) > 0) {
+            if (count($dispositivos) > 0) {
               
-              foreach ($resultado as $resultado) {
+              foreach ($dispositivos as $dispositivos) {
                   echo "<tr>";
-                  echo "<td>" . $resultado['device_id'] . "</td>";
-                  echo "<td>" . $resultado['device_name'] . "</td>";
-                  echo "<td>" . $resultado['device_serie'] . "</td>";
-                  echo "<td>" . $resultado['device_user_id'] . "</td>";
-                  echo "<td> Editar | Eliminar</td>";
-
+                    echo "<td>" . $dispositivos['device_id'] . "</td>";
+                    echo "<td>" . $dispositivos['device_name'] . "</td>";
+                    echo "<td>" . $dispositivos['device_serie'] . "</td>";
+                    echo "<td>" . $dispositivos['device_user_id'] . "</td>";
+                    echo "<td>";
+                    echo "<a href='editar_dispositivo.php?id=" . $dispositivo['device_id'] . "'>Editar</a> | ";
+                    echo "<a href='verDispositivos.php?id=".$dispositivos['device_id'] ."' onclick='return confirm(\"¿Estás seguro de que deseas eliminar este dispositivo?\")'>Eliminar</a>";
+                    echo "</td>";
                   echo "</tr>";
                 }
 

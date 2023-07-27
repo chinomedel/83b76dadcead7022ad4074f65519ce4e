@@ -11,8 +11,33 @@ if (isset($_SESSION['logged']) && $_SESSION['logged'] === true) {
   require_once "includes/db_config.php";
   
   $sqlDispositivos = "SELECT device_id, device_name, device_serie, device_user_id FROM devices WHERE device_user_id = $user_id";
-  $resultado = mysqli_query($conn, $sqlDispositivos);
+  $dispositivos = mysqli_query($conn, $sqlDispositivos);
  
+
+  if (isset($_GET['id'])) {
+    // Obtener el ID del dispositivo desde la URL
+    $device_id = $_GET['id'];
+
+    // Realizar la conexión a la base de datos (asegúrate de incluir el archivo db_config.php o realizar la conexión aquí)
+
+    // Construir la consulta SQL para eliminar el dispositivo con el ID proporcionado
+    $sql = "DELETE FROM devices WHERE device_id = $device_id";
+
+    // Ejecutar la consulta
+    if (mysqli_query($conn, $sql)) {
+        // La eliminación se realizó con éxito
+        echo "El dispositivo con ID $device_id ha sido eliminado exitosamente.";
+        header("Location: verDispositivos.php");
+        exit();
+        die();
+    } else {
+        // Si hay algún error en la consulta
+        echo "Error al intentar eliminar el dispositivo. Detalles del error: " . mysqli_error($conn);
+    }
+
+    // Cerrar la conexión a la base de datos
+    mysqli_close($conn);
+}
 
       // Cerrar la conexión a la base de datos
   mysqli_close($conn);
@@ -23,6 +48,7 @@ if (isset($_SESSION['logged']) && $_SESSION['logged'] === true) {
   exit();
   die();
 }
+
 
 ?>
 
@@ -62,8 +88,7 @@ if (isset($_SESSION['logged']) && $_SESSION['logged'] === true) {
 <!-- ############ LAYOUT START-->
 
   <!-- aside -->
-  <pre><?php echo $sqlDispositivos;
-print_r($dispositivos); ?></pre>
+
   <?php require_once "includes/html/aside.php"; ?>
   <!-- / -->
   
